@@ -1,0 +1,12 @@
+{# templates/inventario_tech/almacen_confirm_delete.html #}
+{% extends 'inventario_tech/base.html' %}
+{% block title %}Eliminar Almacén{% endblock %}
+{% block content %}
+<h2>Eliminar almacén: {{ object.nombre }}</h2>
+<p>¿Estás seguro de que deseas eliminar este almacén?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'inventario_tech:almacen-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

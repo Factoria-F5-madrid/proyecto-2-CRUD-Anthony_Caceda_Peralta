@@ -1,0 +1,11 @@
+{% extends 'inventario_tech/base.html' %}
+{% block title %}Bienvenido{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">Bienvenido a Inventario Tech</h1>
+    <p>Selecciona una opción para continuar:</p>
+    <a href="{% url 'login' %}" class="btn btn-primary me-2">Iniciar sesión</a>
+    <a href="/admin/" class="btn btn-secondary">Panel de administración</a>
+</div>
+{% endblock %}

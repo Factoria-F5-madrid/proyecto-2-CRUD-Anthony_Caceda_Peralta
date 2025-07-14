@@ -1,0 +1,57 @@
+{# templates/inventario_tech/producto_form.html #}
+{% extends 'inventario_tech/base.html' %}
+{% block title %}Formulario Producto{% endblock %}
+{% block content %}
+<h1 class="mb-4">{{ view.object.pk|yesno:"Editar producto,Nuevo producto" }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {# ─ Form principal (Producto) ─ #}
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        {{ form.errors }}
+    </div>
+    {% endif %}
+    {{ form.as_p }}
+
+    <h5>Stock en almacenes</h5>
+
+    {{ stock_formset.management_form }}
+
+    {# ─ Errores globales del formset ─ #}
+    {% if stock_formset.non_form_errors %}
+    <div class="alert alert-danger">
+        {{ stock_formset.non_form_errors }}
+    </div>
+    {% endif %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Almacén</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in stock_formset.forms %}
+            <tr>
+                {{ form.id }} {# ← CAMPO OCULTO NECESARIO #}
+
+                <td>
+                    {{ form.almacen }}
+                    {{ form.almacen.errors }}
+                </td>
+                <td>
+                    {{ form.cantidad }}
+                    {{ form.cantidad.errors }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="{% url 'inventario_tech:producto-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

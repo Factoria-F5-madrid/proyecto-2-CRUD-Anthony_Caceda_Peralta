@@ -1,0 +1,12 @@
+{# templates/inventario_tech/producto_confirm_delete.html #}
+{% extends 'inventario_tech/base.html' %}
+{% block title %}Eliminar Producto{% endblock %}
+{% block content %}
+<h2>Eliminar producto: {{ object.nombre }}</h2>
+<p>¿Estás seguro de que deseas eliminar este producto?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'inventario_tech:producto-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

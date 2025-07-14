@@ -1,0 +1,28 @@
+{# templates/inventario_tech/almacen_list.html #}
+{% extends 'inventario_tech/base.html' %}
+{% block title %}Almacenes{% endblock %}
+{% block content %}
+<h1 class="mb-4">Almacenes</h1>
+<a href="{% url 'inventario_tech:almacen-create' %}" class="btn btn-primary mb-3">+ Nuevo almacén</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for almacen in almacenes %}
+        <tr>
+            <td>{{ almacen.nombre }}</td>
+            <td>
+                <a href="{% url 'inventario_tech:almacen-update' almacen.pk %}"
+                    class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'inventario_tech:almacen-delete' almacen.pk %}"
+                    class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

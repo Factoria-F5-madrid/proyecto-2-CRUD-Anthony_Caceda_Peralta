@@ -1,0 +1,26 @@
+{% extends 'inventario_tech/base.html' %}
+{% block title %}Stock de {{ object.nombre }}{% endblock %}
+{% block content %}
+<h2>Stock de {{ object.nombre }}</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Almacén</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in object.stock_set.all %}
+        <tr>
+            <td>{{ s.almacen.nombre }}</td>
+            <td>{{ s.cantidad }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">Sin stock asignado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'inventario_tech:producto-list' %}" class="btn btn-secondary">Volver</a>
+{% endblock %}

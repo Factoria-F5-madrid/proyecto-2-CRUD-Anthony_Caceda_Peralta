@@ -1,0 +1,20 @@
+{% extends 'inventario_tech/base.html' %}
+{% block title %}{{ view.object.pk|yesno:"Editar almacén,Nuevo almacén" }}{% endblock %}
+{% block content %}
+<h1 class="mb-4">{{ view.object.pk|yesno:"Editar almacén,Nuevo almacén" }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        {{ form.errors }}
+    </div>
+    {% endif %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="{% url 'inventario_tech:almacen-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
